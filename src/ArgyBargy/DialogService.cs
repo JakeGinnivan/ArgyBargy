@@ -123,23 +123,7 @@ namespace ArgyBargy
                     var currentTopmostWindow = GetCurrentTopmostWindow();
                     var frameworkElement = ((FrameworkElement) currentTopmostWindow.Content);
                     var pointToScreen = frameworkElement.PointToScreen(new Point(0, 0));
-                    currentBusyWindow = new Window
-                                      {
-                                          WindowStyle = WindowStyle.None,
-                                          WindowStartupLocation = WindowStartupLocation.Manual,
-                                          Left = pointToScreen.X,
-                                          Top = pointToScreen.Y,
-                                          ShowInTaskbar = false,
-                                          ResizeMode = ResizeMode.NoResize,
-                                          Height = frameworkElement.ActualHeight,
-                                          Width = frameworkElement.ActualWidth,
-                                          Content = busyView,
-                                          Background = Brushes.Transparent,
-                                          AllowsTransparency = true,
-                                          Owner = currentTopmostWindow,
-                                          HorizontalContentAlignment = HorizontalAlignment.Center,
-                                          VerticalContentAlignment = VerticalAlignment.Center
-                                      };
+                    currentBusyWindow = CreateBusyWindow(pointToScreen, frameworkElement, currentTopmostWindow);
                     currentBusyWindow.SetValue(AutomationProperties.AutomationIdProperty, "busyWindow");
                     currentBusyWindow.Owner = currentTopmostWindow;
 
@@ -152,6 +136,27 @@ namespace ArgyBargy
                 busyCount++;
                 return busyView;
             }
+        }
+
+        protected virtual Window CreateBusyWindow(Point topLeftOfWindowContent, FrameworkElement windowContent, Window currentTopmostWindow)
+        {
+            return new Window
+                       {
+                           WindowStyle = WindowStyle.None,
+                           WindowStartupLocation = WindowStartupLocation.Manual,
+                           Left = topLeftOfWindowContent.X,
+                           Top = topLeftOfWindowContent.Y,
+                           ShowInTaskbar = false,
+                           ResizeMode = ResizeMode.NoResize,
+                           Height = windowContent.ActualHeight,
+                           Width = windowContent.ActualWidth,
+                           Content = busyView,
+                           Background = Brushes.Transparent,
+                           AllowsTransparency = true,
+                           Owner = currentTopmostWindow,
+                           HorizontalContentAlignment = HorizontalAlignment.Center,
+                           VerticalContentAlignment = VerticalAlignment.Center
+                       };
         }
 
         public void HideBusy()
