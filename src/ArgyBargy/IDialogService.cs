@@ -16,5 +16,7 @@ namespace ArgyBargy
         DialogueResult ShowCommandLinkDialogueThenExecuteAction(string title, XSection message, params DetailsAction[] detailsActions);
         DialogueResult<TResult> ShowDialogue<TResult>(IDialogueView<TResult> dialogueView);
         DialogueResult ShowDialogue(IDialogueViewWithoutResult dialogueView);
+        IBusyView ShowBusy();
+        void HideBusy();
     }
 }

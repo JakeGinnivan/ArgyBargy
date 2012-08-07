@@ -34,17 +34,9 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="PropertyChanged, Version=1.25.0.0, Culture=neutral, PublicKeyToken=1fa521d45b9ea671, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PropertyChanged.Fody.1.25.0.0\Lib\NET40\PropertyChanged.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="XText">
@@ -56,6 +48,7 @@
     <Compile Include="ActionsDialogueResult.cs" />
     <Compile Include="ActionsDialogueResult`1.cs" />
     <Compile Include="AffirmativeDetailsAction.cs" />
+    <Compile Include="ApplicationState.cs" />
     <Compile Include="CancelDetailsAction.cs" />
     <Compile Include="Controls\CommandLink.cs" />
     <Compile Include="DelegateCommand`1.cs" />
@@ -67,9 +60,11 @@
     <Compile Include="DialogueResultEventArgs.cs" />
     <Compile Include="DialogueResultEventArgs`1.cs" />
     <Compile Include="DialogueResult`1.cs" />
+    <Compile Include="DialogWindowAdapter.cs" />
     <Compile Include="IActionsDialogueView.cs" />
     <Compile Include="IAsyncCommand.cs" />
     <Compile Include="IAsyncCommand`1.cs" />
+    <Compile Include="IBusyView.cs" />
     <Compile Include="ICommandLinksDialogueView.cs" />
     <Compile Include="IDialogService.cs" />
     <Compile Include="IDialogueView.cs" />
@@ -77,15 +72,20 @@
     <Compile Include="IDialogueView`1.cs" />
     <Compile Include="IDialogueWindow.cs" />
     <Compile Include="IErrorDialogue.cs" />
+    <Compile Include="ILogAdapter.cs" />
     <Compile Include="INotifyMeOnCancel.cs" />
     <Compile Include="IRaiseCanExecuteChanged.cs" />
+    <Compile Include="IShell.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="NegativeDetailsAction.cs" />
-    <Compile Include="PicklistOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TraceLogAdapter.cs" />
     <Compile Include="Views\ActionDialogueView.vm.cs" />
     <Compile Include="Views\ActionDialogueView.xaml.cs">
       <DependentUpon>ActionDialogueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BusyView.xaml.cs">
+      <DependentUpon>BusyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CommandLinksDialogueView.vm.cs" />
     <Compile Include="Views\CommandLinksDialogueView.xaml.cs">
@@ -110,6 +110,10 @@
     <Page Include="Views\ActionDialogueView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BusyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CommandLinksDialogueView.xaml">
       <Generator>MSBuild:Compile</Generator>

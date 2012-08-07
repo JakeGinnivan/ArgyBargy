@@ -7,11 +7,8 @@ namespace ArgyBargy.Views
 {
     public partial class DialogWindow : IDialogueWindow
     {
-        private readonly INotifyMeOnCancel cancelAuthority;
-
-        public DialogWindow(Control content, INotifyMeOnCancel cancelAuthority)
+        public DialogWindow(Control content)
         {
-            this.cancelAuthority = cancelAuthority;
             InitializeComponent();
             BorderSettings.Child = content;
 
@@ -23,14 +20,14 @@ namespace ArgyBargy.Views
 
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
-            if (cancelAuthority == null || cancelAuthority.AllowCancel())
-                Close();
+            Close();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            BorderSettings.Child = null;
             base.OnClosing(e);
+            if (!e.Cancel)
+                BorderSettings.Child = null;
         }
 
         private void DialogWindowMouseDown(object sender, MouseButtonEventArgs e)

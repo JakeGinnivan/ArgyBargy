@@ -17,5 +17,10 @@
                 Content="Normal Window"
                 HorizontalAlignment="Center"
                 Margin="15"/>
+        
+        <Button Click="ShowBusy"
+                Content="Show Busy"
+                HorizontalAlignment="Center"
+                Margin="15"/>
     </StackPanel>
 </Window>

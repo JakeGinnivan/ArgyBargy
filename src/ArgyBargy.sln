@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgyBargy", "ArgyBargy\ArgyBargy.csproj", "{9CCBCC78-C82F-48AB-952B-CCC03C1F95B9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgyBargy.Demo", "ArgyBargy.Demo\ArgyBargy.Demo.csproj", "{C9D2A4AF-5FAB-4E56-8B29-B097172BF2D6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{28E5EAEC-DA2E-4E62-8256-66E4843E4A31}"
@@ -11,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{28E5EA
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 		.nuget\nuget.exe = .nuget\nuget.exe
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgyBargy", "ArgyBargy\ArgyBargy.csproj", "{9CCBCC78-C82F-48AB-952B-CCC03C1F95B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
