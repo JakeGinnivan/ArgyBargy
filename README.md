@@ -5,7 +5,7 @@ A WPF library which makes Dialog Management quite easy.
 
 WPF makes dialogues hard, especially when trying to do it in a testable way. Then you throw a shell and busy windows as cross cutting concerns and things get complex.
 
-Argy Bargy is the result of many arguments with WPF about how this should be easier, and this library helps you win!
+Argy Bargy is the result of many arguments with WPF about how this should be easier, and this library helps you win those arguments!
 
 ## Command Link Dialog
 
