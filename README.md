@@ -7,6 +7,68 @@ WPF makes dialogues hard, especially when trying to do it in a testable way. The
 
 Argy Bargy is the result of many arguments with WPF about how this should be easier, and this library helps you win those arguments!
 
+## Dialog Management
+Argy Bargy has two main interfaces you need to worry about, `DialogViewWithResult<T>` and `DialogViewWithoutResult`.
+
+You should create an interface for each view, this means there is a well defined contract for views talking to each other, and then to show any view you simply inject the ISomeView into your viewmodel and use the dialog service to show it.
+
+So it looks something like:
+
+    public class MyWindow : UserControl, IMyWindow
+    {
+        MyViewModel viewModel;
+        
+        public MyWindow(MyViewModel viewModel)
+        {
+            this.viewModel = viewModel;
+            DataContext = viewModel;
+            InitializeComponent();
+        }
+        
+        public void DialogShown(IDialogWindow window)
+        {
+            viewModel.Initialise(); //Can pass `this` into the viewmodel if the viewmodel needs to talk to the view. But don't by default
+        }
+        
+        public void DialogHidden()
+        {
+        
+        }
+        
+        //This event allows us to pass a result back to whoever has shown this view.
+        // This means we don't need to expose state on our view's interface which ends up making our code easier to write
+        public event EventHandler<DialogueResultEventArgs> Finished
+        {
+            add { viewModel.Finished += value; }
+            remove { viewModel.Finished -= value; }
+        }
+    }
+    
+    public class MyViewModel : INotifyPropertyChanged
+    {
+        public event EventHandler<DialogueResultEventArgs> Finished;
+        
+        protected void OnFinished(DialogueResultEventArgs e)
+        { /*impl*/ }
+    }
+    
+And to display a dialog
+
+    public SomeViewModel(Func<IFooView> fooViewFactory, IDialogService dialogService)
+    {
+        this.fooViewFactory = fooViewFactory;
+        this.dialogService = dialogService;
+    }
+    
+    public void ShowFoo()
+    {
+        var fooView = fooViewFactory();
+        fooView.Initialise(SomeState);
+        var result = dialogService.ShowDialog(fooView);
+    }
+    
+Argy Bargy also comes with a few views already done for you, and more will be added (error and others).
+
 ## Command Link Dialog
 
     dialogService.ShowCommandLinkDialogueThenExecuteAction(
